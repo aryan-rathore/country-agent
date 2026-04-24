@@ -5,7 +5,8 @@ from pydantic import BaseModel, Field
 from dotenv import load_dotenv
 import time
 import logging
-
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from agent.graph import country_agent
 from agent.state import AgentState
 
@@ -18,6 +19,11 @@ app = FastAPI(
     description="Ask natural language questions about any country",
     version="1.0.0"
 )
+app.mount("/frontend", StaticFiles(directory="frontend"), name="frontend")
+
+@app.get("/")
+async def serve_home():
+    return FileResponse("frontend/index.html")
 
 # Allow frontend to call the API
 app.add_middleware(

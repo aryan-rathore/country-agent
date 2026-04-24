@@ -61,7 +61,11 @@
     document.getElementById('loading').style.display = 'block';
     document.getElementById('result').style.display = 'none';
     try {
-      const res = await fetch('http://localhost:8000/ask', {
+      const API_URL = window.location.hostname === 'localhost' 
+        ? 'http://localhost:8000' 
+        : 'https://country-agent.onrender.com'; 
+
+      const res = await fetch(`${API_URL}/ask`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question: q })
