@@ -65,7 +65,7 @@
         ? 'http://localhost:8000' 
         : 'https://country-agent-iqng.onrender.com';   
 
-      const res = await fetch(`${API_URL}/ask`, {
+      const res = await fetch(`/ask`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question: q })
